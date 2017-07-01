@@ -40,9 +40,9 @@ def post_create(request):
 	}
 	return render(request, "post_form.html", context)
 
-def post_detail(request, id=None): #retrive
+def post_detail(request, slug=None): #retrive
 	#instance = Post.objects.get(id=1)
-	instance = get_object_or_404(Post, id=id)
+	instance = get_object_or_404(Post, slug=slug)
 	if instance.publish > timezone.now().date() or instance.draft:
 		if not request.user.is_staff or not request.user.is_superuser:
 			raise Http404
